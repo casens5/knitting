@@ -15,6 +15,14 @@ body {
   height: fit-content
 }
 
+#rowsInput, #columnsInput {
+  width: 5em;
+}
+
+.hidden {
+  display: none
+}
+
 .row {
   display: grid;
   width: fit-content

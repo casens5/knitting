@@ -54,10 +54,24 @@ function generateGrid(grid) {
 // event listeners
 // *********
 $("getGridSize").addEventListener("click", () => {
-  console.log("hi!");
   const rows = parseInt($("rowsInput").value, 10);
   const columns = parseInt($("columnsInput").value, 10);
   const grid = resetGrid(rows, columns);
-  console.log("hi!", rows, columns, grid);
   generateGrid(grid);
+});
+
+$("controlsDrawer").addEventListener("click", () => {
+  const controls = $("controls");
+  const upArrow = $("UpArrow");
+  const downArrow = $("DownArrow");
+  controls.dataset.hidden = controls.dataset.hidden === "0" ? "1" : "0";
+  if (controls.dataset.hidden === "0") {
+    controls.classList.remove("hidden");
+    downArrow.classList.add("hidden");
+    upArrow.classList.remove("hidden");
+  } else {
+    controls.classList.add("hidden");
+    downArrow.classList.remove("hidden");
+    upArrow.classList.add("hidden");
+  }
 });
