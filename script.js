@@ -19,20 +19,33 @@ function resetGrid(rows, columns) {
 function generateGrid(grid) {
   const outputGrid = $("outputGrid");
   outputGrid.style.gridTemplateRows = `repeat(${grid.length}, 1fr)`;
-  grid.forEach((row) => {
+  grid.forEach((row, index) => {
     const rowDiv = document.createElement("div");
     rowDiv.classList.add("row");
     rowDiv.style.gridTemplateColumns = `repeat(${row.length}, 1fr)`;
     outputGrid.append(rowDiv);
-    row.forEach((cell) => {
+    row.forEach((cell, jindex) => {
       const cellDiv = document.createElement("div");
       rowDiv.append(cellDiv);
       cellDiv.classList.add("cell");
-      if (cell === 1) {
+      cellDiv.dataset.row = index;
+      cellDiv.dataset.column = jindex;
+      cellDiv.dataset.live = cell;
+      if (cellDiv.dataset.live === "1") {
         cellDiv.classList.add("live");
       } else {
         cellDiv.classList.add("dead");
       }
+      cellDiv.addEventListener("click", () => {
+        if (cellDiv.dataset.live === "1") {
+          cellDiv.classList.remove("live");
+          cellDiv.classList.add("dead");
+        } else {
+          cellDiv.classList.remove("dead");
+          cellDiv.classList.add("live");
+        }
+        cellDiv.dataset.live = cellDiv.dataset.live === "0" ? "1" : "0";
+      });
     });
   });
 }
