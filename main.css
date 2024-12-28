@@ -1,0 +1,35 @@
+body {
+  background: #222;
+  min-height: 100vh;
+  color: #ccc;
+}
+
+.gridContainer {
+  display: grid;
+  justify-items: center;
+}
+
+#outputGrid {
+  display: grid;
+  gap: 0;
+  height: fit-content
+}
+
+.row {
+  display: grid;
+  width: fit-content
+}
+
+.cell {
+  width: 16px;
+  height: 16px;
+  outline: 1px solid #555
+}
+
+.live {
+  background: #fff;
+}
+
+.dead {
+  background: #000
+}
