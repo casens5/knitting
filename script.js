@@ -50,6 +50,18 @@ function generateGrid(grid) {
   });
 }
 
+function applyRule(grid, start, rule) {
+  for (let i = start[0]; i < grid.length; i++) {
+    for (let j = start[0] === i ? start[1] : 0; j < grid[0].length; j++) {
+      const prev = j === 0 ? grid[i - 1][grid[0].length - 1] : grid[i][j - 1];
+      const next =
+        j === grid[i].length ? grid[i][grid[0].length - 1] : grid[i - 1][j + 1];
+      const shape = prev + 2 * grid[i - 1][j] + 4 * next;
+      grid[i][j] = rule[shape];
+    }
+  }
+}
+
 // *********
 // event listeners
 // *********
@@ -57,6 +69,9 @@ $("getGridSize").addEventListener("click", () => {
   const rows = parseInt($("rowsInput").value, 10);
   const columns = parseInt($("columnsInput").value, 10);
   const grid = resetGrid(rows, columns);
+  grid[1][0] = 1;
+  const rule = [1, 0, 0, 0, 0, 0, 0, 0];
+  applyRule(grid, [1, 1], rule);
   generateGrid(grid);
 });
 
