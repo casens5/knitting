@@ -13,7 +13,7 @@ function capitalize(string) {
 }
 
 function resetGrid(rows, columns) {
-  return [...Array(columns)].map(() => Array(rows).fill(0));
+  return [...Array(rows)].map(() => Array(columns).fill(0));
 }
 
 function generateGrid(grid) {
