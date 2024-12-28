@@ -1,41 +1,37 @@
 <!doctype html>
 <html>
+  <head>
+    <title>knitting</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./main.css" rel="stylesheet" />
+  </head>
 
-<head>
-  <title>knitting</title>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="./main.css" rel="stylesheet" />
-</head>
-
-<body>
-  <div>
-    <div id="controlsDrawer">
-      controls
-      <span id="UpArrow">▲</span>
-      <span id="DownArrow" class="hidden">▼</span>
-    </div>
-    <fieldset id="controls" data-hidden="0">
-      <div>
-        <label>
-          columns:
-          <input type="number" value="60" id="columnsInput" />
-        </label>
-        <label>
-          rows:
-          <input type="number" value="100" id="rowsInput" />
-        </label>
-        <button id="getGridSize" class="">resize grid</button>
+  <body>
+    <div>
+      <div id="controlsDrawer">
+        controls
+        <span id="UpArrow">▲</span>
+        <span id="DownArrow" class="hidden">▼</span>
       </div>
-      <div>
-
+      <fieldset id="controls" data-hidden="0">
+        <div>
+          <label>
+            columns:
+            <input type="number" value="60" id="columnsInput" />
+          </label>
+          <label>
+            rows:
+            <input type="number" value="100" id="rowsInput" />
+          </label>
+          <button id="getGridSize" class="">resize grid</button>
+        </div>
+        <div id="ruleControl"></div>
+      </fieldset>
+      <div class="gridContainer">
+        <div id="outputGrid"></div>
       </div>
-    </fieldset>
-    <div class="gridContainer">
-      <div id="outputGrid"></div>
     </div>
-  </div>
-  <script src="script.js"></script>
-</body>
-
+    <script src="script.js"></script>
+  </body>
 </html>

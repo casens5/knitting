@@ -19,6 +19,18 @@ body {
   width: 5em;
 }
 
+#ruleControl {
+  display: grid;
+  grid-auto-flow: column;
+  margin: 16px;
+}
+
+.ruleContainer {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); 
+  width: fit-content;
+}
+
 .hidden {
   display: none
 }
@@ -26,6 +38,11 @@ body {
 .row {
   display: grid;
   width: fit-content
+}
+
+.no-border {
+  width: 16px;
+  height: 16px;
 }
 
 .cell {
