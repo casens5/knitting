@@ -53,6 +53,8 @@ function generateGrid(grid) {
 function generateRuleDisplay(number, total) {
   const ruleContainer = document.createElement("div");
   ruleContainer.classList.add("ruleContainer");
+  ruleContainer.id = `rule-${number}`;
+  ruleContainer.dataset.value = "0";
   const spaceDiv = document.createElement("div");
   spaceDiv.classList.add("no-border");
   ruleContainer.append(spaceDiv);
@@ -76,10 +78,31 @@ function generateRuleDisplay(number, total) {
     }
   }
   const inputDiv = document.createElement("div");
-  inputDiv.classList.add("cell");
+  inputDiv.classList.add("cell", "dead");
   ruleContainer.append(inputDiv);
 
+  ruleContainer.addEventListener("click", () => {
+    if (ruleContainer.dataset.value === "0") {
+      inputDiv.classList.add("live");
+      inputDiv.classList.remove("dead");
+      ruleContainer.dataset.value = "1";
+    } else {
+      inputDiv.classList.add("dead");
+      inputDiv.classList.remove("live");
+      ruleContainer.dataset.value = "0";
+    }
+  });
+
   return ruleContainer;
+}
+
+function readRule() {
+  const rule = [];
+  for (let i = 0; i < 8; i++) {
+    const ruleContainer = $(`rule-${i}`);
+    rule.push(Number(ruleContainer.dataset.value));
+  }
+  return rule;
 }
 
 function applyRule(grid, start, rule) {
@@ -94,6 +117,15 @@ function applyRule(grid, start, rule) {
   }
 }
 
+function doGrid() {
+  const rows = parseInt($("rowsInput").value, 10);
+  const columns = parseInt($("columnsInput").value, 10);
+  const grid = resetGrid(rows, columns);
+  const rule = readRule();
+  applyRule(grid, [1, 1], rule);
+  generateGrid(grid);
+}
+
 const ruleControl = $("ruleControl");
 for (let i = 0; i < 8; i++) {
   const rule = generateRuleDisplay(i, 3);
@@ -103,15 +135,7 @@ for (let i = 0; i < 8; i++) {
 // *********
 // event listeners
 // *********
-$("getGridSize").addEventListener("click", () => {
-  const rows = parseInt($("rowsInput").value, 10);
-  const columns = parseInt($("columnsInput").value, 10);
-  const grid = resetGrid(rows, columns);
-  grid[1][0] = 1;
-  const rule = [0, 1, 0, 0, 0, 0, 0, 0];
-  applyRule(grid, [1, 1], rule);
-  generateGrid(grid);
-});
+$("getGridSize").addEventListener("click", doGrid);
 
 $("controlsDrawer").addEventListener("click", () => {
   const controls = $("controls");

@@ -20,8 +20,8 @@ body {
 }
 
 #ruleControl {
-  display: grid;
-  grid-auto-flow: column;
+  display: flex;
+  gap: 16px;
   margin: 16px;
 }
 
