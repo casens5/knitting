@@ -4,6 +4,8 @@
 // utils
 // *********
 
+const grid = [];
+
 function $(id) {
   return document.getElementById(id);
 }
@@ -12,35 +14,38 @@ function resetGrid(rows, columns) {
   return [...Array(rows)].map(() => Array(columns).fill(0));
 }
 
-function generateGrid(grid) {
+function generateGridHtml(grid) {
   const outputGrid = $("outputGrid");
+  outputGrid.replaceChildren();
   outputGrid.style.gridTemplateRows = `repeat(${grid.length}, 1fr)`;
   grid.forEach((row, index) => {
     const rowDiv = document.createElement("div");
     rowDiv.classList.add("row");
     rowDiv.style.gridTemplateColumns = `repeat(${row.length}, 1fr)`;
     outputGrid.append(rowDiv);
+
     row.forEach((cell, jindex) => {
       const cellDiv = document.createElement("div");
       rowDiv.append(cellDiv);
       cellDiv.classList.add("cell");
-      cellDiv.dataset.row = index;
-      cellDiv.dataset.column = jindex;
-      cellDiv.dataset.live = cell;
-      if (cellDiv.dataset.live === "1") {
+
+      if (cell === 1) {
         cellDiv.classList.add("live");
       } else {
         cellDiv.classList.add("dead");
       }
+
       cellDiv.addEventListener("click", () => {
-        if (cellDiv.dataset.live === "1") {
+        const live = grid[index][jindex];
+        if (live === 1) {
           cellDiv.classList.remove("live");
           cellDiv.classList.add("dead");
         } else {
           cellDiv.classList.remove("dead");
           cellDiv.classList.add("live");
         }
-        cellDiv.dataset.live = cellDiv.dataset.live === "0" ? "1" : "0";
+        grid[index][jindex] = live === 1 ? 0 : 1;
+        //calculateGrid(id);
       });
     });
   });
@@ -113,9 +118,7 @@ function applyRule(grid, start, rule) {
   }
 }
 
-function doGrid() {
-  const rows = parseInt($("rowsInput").value, 10);
-  const columns = parseInt($("columnsInput").value, 10);
+function calculateGrid(start) {
   const grid = resetGrid(rows, columns);
   const rule = readRule();
   applyRule(grid, [1, 1], rule);
@@ -131,7 +134,13 @@ for (let i = 0; i < 8; i++) {
 // *********
 // event listeners
 // *********
-$("getGridSize").addEventListener("click", doGrid);
+$("getGridSize").addEventListener("click", () => {
+  const rows = parseInt($("rowsInput").value, 10);
+  const columns = parseInt($("columnsInput").value, 10);
+  grid.length = 0;
+  grid.push(...resetGrid(rows, columns));
+  generateGridHtml(grid);
+});
 
 $("controlsDrawer").addEventListener("click", () => {
   const controls = $("controls");
