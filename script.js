@@ -8,10 +8,6 @@ function $(id) {
   return document.getElementById(id);
 }
 
-function capitalize(string) {
-  return String(string).charAt(0).toUpperCase() + String(string).slice(1);
-}
-
 function resetGrid(rows, columns) {
   return [...Array(rows)].map(() => Array(columns).fill(0));
 }
