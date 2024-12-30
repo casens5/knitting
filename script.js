@@ -5,6 +5,8 @@
 // *********
 
 const grid = [];
+const dimensions = [];
+const rule = [];
 
 function $(id) {
   return document.getElementById(id);
@@ -55,7 +57,6 @@ function generateRuleDisplay(number, total) {
   const ruleContainer = document.createElement("div");
   ruleContainer.classList.add("ruleContainer");
   ruleContainer.id = `rule-${number}`;
-  ruleContainer.dataset.value = "0";
   const spaceDiv = document.createElement("div");
   spaceDiv.classList.add("no-border");
   ruleContainer.append(spaceDiv);
@@ -78,12 +79,13 @@ function generateRuleDisplay(number, total) {
       }
     }
   }
+
   const inputDiv = document.createElement("div");
   inputDiv.classList.add("cell", "dead");
   ruleContainer.append(inputDiv);
 
   ruleContainer.addEventListener("click", () => {
-    if (ruleContainer.dataset.value === "0") {
+    if (rule[number] === 0) {
       inputDiv.classList.add("live");
       inputDiv.classList.remove("dead");
       ruleContainer.dataset.value = "1";
@@ -92,6 +94,7 @@ function generateRuleDisplay(number, total) {
       inputDiv.classList.remove("live");
       ruleContainer.dataset.value = "0";
     }
+    rule[number] = rule[number] === 0 ? 1 : 0;
   });
 
   return ruleContainer;
@@ -127,8 +130,9 @@ function calculateGrid(start) {
 
 const ruleControl = $("ruleControl");
 for (let i = 0; i < 8; i++) {
-  const rule = generateRuleDisplay(i, 3);
-  ruleControl.append(rule);
+  const ruleDiv = generateRuleDisplay(i, 3);
+  ruleControl.append(ruleDiv);
+  rule.push(0);
 }
 
 // *********
@@ -137,6 +141,8 @@ for (let i = 0; i < 8; i++) {
 $("getGridSize").addEventListener("click", () => {
   const rows = parseInt($("rowsInput").value, 10);
   const columns = parseInt($("columnsInput").value, 10);
+  dimensions.length = 0;
+  dimensions.push(rows, columns);
   grid.length = 0;
   grid.push(...resetGrid(rows, columns));
   generateGridHtml(grid);
