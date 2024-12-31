@@ -19,7 +19,7 @@ function resetGrid() {
   );
 }
 
-function generateGridHtml(grid) {
+function generateGridHtml() {
   const outputGrid = $("outputGrid");
   outputGrid.replaceChildren();
   outputGrid.style.gridTemplateRows = `repeat(${grid.length}, 1fr)`;
@@ -97,6 +97,15 @@ function setPixelValue(div, value) {
   }
 }
 
+function randomSeed(randLevel) {
+  resetGrid();
+  for (let i = 0; i < grid[0].length; i++) {
+    grid[0][i] = Number(Math.random() < randLevel);
+  }
+  grid[1][0] = Number(Math.random() < randLevel);
+  generateGridHtml();
+}
+
 function randomRule() {
   const length = rule.length;
   rule.length = 0;
@@ -104,6 +113,13 @@ function randomRule() {
     rule.push(Math.random() > 0.5 ? 1 : 0);
     setPixelValue($(`rule-${i}-input`), rule[i]);
   }
+}
+
+function updateDimensions() {
+  const rows = parseInt($("rowsInput").value, 10);
+  const columns = parseInt($("columnsInput").value, 10);
+  dimensions.length = 0;
+  dimensions.push(rows, columns);
 }
 
 function applyRule(start) {
@@ -136,12 +152,9 @@ for (let i = 0; i < 8; i++) {
 // event listeners
 // *********
 $("getGridSize").addEventListener("click", () => {
-  const rows = parseInt($("rowsInput").value, 10);
-  const columns = parseInt($("columnsInput").value, 10);
-  dimensions.length = 0;
-  dimensions.push(rows, columns);
+  updateDimensions();
   resetGrid();
-  generateGridHtml(grid);
+  generateGridHtml();
 });
 
 $("controlsDrawer").addEventListener("click", () => {
@@ -161,3 +174,6 @@ $("controlsDrawer").addEventListener("click", () => {
 });
 
 $("randomRule").addEventListener("click", randomRule);
+$("randomSeed").addEventListener("click", () => {
+  randomSeed($("randomSeedDensity").value);
+});
