@@ -12,8 +12,11 @@ function $(id) {
   return document.getElementById(id);
 }
 
-function resetGrid(rows, columns) {
-  return [...Array(rows)].map(() => Array(columns).fill(0));
+function resetGrid() {
+  grid.length = 0;
+  grid.push(
+    ...[...Array(dimensions[0])].map(() => Array(dimensions[1]).fill(0)),
+  );
 }
 
 function generateGridHtml(grid) {
@@ -30,22 +33,13 @@ function generateGridHtml(grid) {
       const cellDiv = document.createElement("div");
       rowDiv.append(cellDiv);
       cellDiv.classList.add("cell");
+      const initialValue = cell === 1 ? 0 : 1;
 
-      if (cell === 1) {
-        cellDiv.classList.add("live");
-      } else {
-        cellDiv.classList.add("dead");
-      }
+      setPixelValue(cellDiv, initialValue);
 
       cellDiv.addEventListener("click", () => {
         const live = grid[index][jindex];
-        if (live === 1) {
-          cellDiv.classList.remove("live");
-          cellDiv.classList.add("dead");
-        } else {
-          cellDiv.classList.remove("dead");
-          cellDiv.classList.add("live");
-        }
+        setPixelValue(cellDiv, live);
         grid[index][jindex] = live === 1 ? 0 : 1;
         applyRule(start);
       });
@@ -81,32 +75,35 @@ function generateRuleDisplay(number, total) {
   }
 
   const inputDiv = document.createElement("div");
+  inputDiv.id = `rule-${number}-input`;
   inputDiv.classList.add("cell", "dead");
   ruleContainer.append(inputDiv);
 
   ruleContainer.addEventListener("click", () => {
-    if (rule[number] === 0) {
-      inputDiv.classList.add("live");
-      inputDiv.classList.remove("dead");
-      ruleContainer.dataset.value = "1";
-    } else {
-      inputDiv.classList.add("dead");
-      inputDiv.classList.remove("live");
-      ruleContainer.dataset.value = "0";
-    }
+    setPixelValue(inputDiv, rule[number]);
     rule[number] = rule[number] === 0 ? 1 : 0;
   });
 
   return ruleContainer;
 }
 
-function readRule() {
-  const rule = [];
-  for (let i = 0; i < 8; i++) {
-    const ruleContainer = $(`rule-${i}`);
-    rule.push(Number(ruleContainer.dataset.value));
+function setPixelValue(div, value) {
+  if (value === 0) {
+    div.classList.add("live");
+    div.classList.remove("dead");
+  } else {
+    div.classList.add("dead");
+    div.classList.remove("live");
   }
-  return rule;
+}
+
+function randomRule() {
+  const length = rule.length;
+  rule.length = 0;
+  for (let i = 0; i < length; i++) {
+    rule.push(Math.random() > 0.5 ? 1 : 0);
+    setPixelValue($(`rule-${i}-input`), rule[i]);
+  }
 }
 
 function applyRule(start) {
@@ -143,8 +140,7 @@ $("getGridSize").addEventListener("click", () => {
   const columns = parseInt($("columnsInput").value, 10);
   dimensions.length = 0;
   dimensions.push(rows, columns);
-  grid.length = 0;
-  grid.push(...resetGrid(rows, columns));
+  resetGrid();
   generateGridHtml(grid);
 });
 
@@ -163,3 +159,5 @@ $("controlsDrawer").addEventListener("click", () => {
     upArrow.classList.add("hidden");
   }
 });
+
+$("randomRule").addEventListener("click", randomRule);
