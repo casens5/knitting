@@ -47,7 +47,7 @@ function generateGridHtml(grid) {
           cellDiv.classList.add("live");
         }
         grid[index][jindex] = live === 1 ? 0 : 1;
-        //calculateGrid(id);
+        applyRule(start);
       });
     });
   });
@@ -109,23 +109,23 @@ function readRule() {
   return rule;
 }
 
-function applyRule(grid, start, rule) {
+function applyRule(start) {
+  const tempGrid = grid.slice(0, start[0]);
+  tempGrid.push(grid[start[0]].slice(0, start[1]));
   for (let i = start[0]; i < grid.length; i++) {
     for (let j = start[0] === i ? start[1] : 0; j < grid[0].length; j++) {
-      const prev = j === 0 ? grid[i - 1][grid[0].length - 1] : grid[i][j - 1];
+      const prev =
+        j === 0 ? tempGrid[i - 1][tempGrid[0].length - 1] : tempGrid[i][j - 1];
       const next =
-        j === grid[i].length ? grid[i][grid[0].length - 1] : grid[i - 1][j + 1];
-      const shape = prev + 2 * grid[i - 1][j] + 4 * next;
-      grid[i][j] = rule[shape];
+        j === tempGrid[i].length
+          ? tempGrid[i][grid[0].length - 1]
+          : tempGrid[i - 1][j + 1];
+      const shape = prev + 2 * tempGrid[i - 1][j] + 4 * next;
+      tempGrid[i][j] = rule[shape];
     }
   }
-}
-
-function calculateGrid(start) {
-  const grid = resetGrid(rows, columns);
-  const rule = readRule();
-  applyRule(grid, [1, 1], rule);
-  generateGrid(grid);
+  grid.length = 0;
+  grid.push(...tempGrid);
 }
 
 const ruleControl = $("ruleControl");
