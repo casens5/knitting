@@ -35,11 +35,11 @@ function generateGridHtml() {
       cellDiv.classList.add("cell");
       const initialValue = cell === 1 ? 0 : 1;
 
-      setPixelValue(cellDiv, initialValue);
+      flipPixelValue(cellDiv, initialValue);
 
       cellDiv.addEventListener("click", () => {
         const live = grid[index][jindex];
-        setPixelValue(cellDiv, live);
+        flipPixelValue(cellDiv, live);
         grid[index][jindex] = live === 1 ? 0 : 1;
 
         //applyRule([index, jindex]);
@@ -82,14 +82,14 @@ function generateRuleDisplay(number, total) {
   ruleContainer.append(inputDiv);
 
   ruleContainer.addEventListener("click", () => {
-    setPixelValue(inputDiv, rule[number]);
+    flipPixelValue(inputDiv, rule[number]);
     rule[number] = rule[number] === 0 ? 1 : 0;
   });
 
   return ruleContainer;
 }
 
-function setPixelValue(div, value) {
+function flipPixelValue(div, value) {
   if (value === 0) {
     div.classList.add("live");
     div.classList.remove("dead");
@@ -114,7 +114,7 @@ function randomRule() {
   rule.length = 0;
   for (let i = 0; i < length; i++) {
     rule.push(Math.random() > 0.5 ? 1 : 0);
-    setPixelValue($(`rule-${i}-input`), rule[i]);
+    flipPixelValue($(`rule-${i}-input`), rule[i] === 1 ? 0 : 1);
   }
 }
 
