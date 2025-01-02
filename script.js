@@ -41,7 +41,9 @@ function generateGridHtml() {
         const live = grid[index][jindex];
         setPixelValue(cellDiv, live);
         grid[index][jindex] = live === 1 ? 0 : 1;
-        applyRule(start);
+
+        //applyRule([index, jindex]);
+        generateGridHtml();
       });
     });
   });
@@ -103,6 +105,7 @@ function randomSeed(randLevel) {
     grid[0][i] = Number(Math.random() < randLevel);
   }
   grid[1][0] = Number(Math.random() < randLevel);
+  //applyRule([1, 1]);
   generateGridHtml();
 }
 
@@ -141,11 +144,16 @@ function applyRule(start) {
   grid.push(...tempGrid);
 }
 
+function init() {
 const ruleControl = $("ruleControl");
 for (let i = 0; i < 8; i++) {
   const ruleDiv = generateRuleDisplay(i, 3);
   ruleControl.append(ruleDiv);
   rule.push(0);
+  }
+  updateDimensions();
+  resetGrid();
+  generateGridHtml();
 }
 
 // *********
@@ -177,3 +185,5 @@ $("randomRule").addEventListener("click", randomRule);
 $("randomSeed").addEventListener("click", () => {
   randomSeed($("randomSeedDensity").value);
 });
+
+init();
