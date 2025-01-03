@@ -78,15 +78,25 @@ function generateRuleDisplay(number, total) {
 
   const inputDiv = document.createElement("div");
   inputDiv.id = `rule-${number}-input`;
-  inputDiv.classList.add("cell", "dead");
+  inputDiv.classList.add("cell", "off");
   ruleContainer.append(inputDiv);
 
   ruleContainer.addEventListener("click", () => {
-    flipPixelValue(inputDiv, rule[number]);
     rule[number] = rule[number] === 0 ? 1 : 0;
+    setRuleValue(inputDiv, rule[number]);
   });
 
   return ruleContainer;
+}
+
+function setRuleValue(div, value) {
+  if (value === 0) {
+    div.classList.add("off");
+    div.classList.remove("on");
+  } else {
+    div.classList.add("on");
+    div.classList.remove("off");
+  }
 }
 
 function flipPixelValue(div, value) {
@@ -115,7 +125,7 @@ function randomRule() {
   rule.push(0);
   for (let i = 1; i < length; i++) {
     rule.push(Math.random() > 0.5 ? 1 : 0);
-    flipPixelValue($(`rule-${i}-input`), rule[i] === 1 ? 0 : 1);
+    setRuleValue($(`rule-${i}-input`), rule[i]);
   }
 }
 

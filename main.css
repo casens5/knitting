@@ -1,7 +1,13 @@
 body {
-  background: #222;
+  background: #123;
   min-height: 100vh;
   color: #ccc;
+  padding: 0px;
+  margin: 0px;
+}
+
+main {
+  padding: 16px;
 }
 
 .gridContainer {
@@ -12,10 +18,11 @@ body {
 #outputGrid {
   display: grid;
   gap: 0;
-  height: fit-content
+  height: fit-content;
 }
 
-#rowsInput, #columnsInput {
+#rowsInput,
+#columnsInput {
   width: 5em;
 }
 
@@ -27,17 +34,17 @@ body {
 
 .ruleContainer {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr)); 
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   width: fit-content;
 }
 
 .hidden {
-  display: none
+  display: none;
 }
 
 .row {
   display: grid;
-  width: fit-content
+  width: fit-content;
 }
 
 .no-border {
@@ -48,13 +55,21 @@ body {
 .cell {
   width: 16px;
   height: 16px;
-  outline: 1px solid #555
+  outline: 1px solid #555;
 }
 
 .live {
-  background: #fff;
+  background: #ccc;
 }
 
 .dead {
-  background: #000
+  background: #222;
+}
+
+.on {
+  background: #3f4;
+}
+
+.off {
+  background: #050;
 }
