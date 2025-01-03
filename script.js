@@ -42,7 +42,7 @@ function generateGridHtml() {
         flipPixelValue(cellDiv, live);
         grid[index][jindex] = live === 1 ? 0 : 1;
 
-        //applyRule([index, jindex]);
+        applyRule([index, jindex]);
         generateGridHtml();
       });
     });
@@ -105,7 +105,7 @@ function randomSeed(randLevel) {
     grid[0][i] = Number(Math.random() < randLevel);
   }
   grid[1][0] = Number(Math.random() < randLevel);
-  //applyRule([1, 1]);
+  applyRule([1, 1]);
   generateGridHtml();
 }
 
@@ -126,18 +126,30 @@ function updateDimensions() {
 }
 
 function applyRule(start) {
-  const tempGrid = grid.slice(0, start[0]);
-  tempGrid.push(grid[start[0]].slice(0, start[1]));
-  for (let i = start[0]; i < grid.length; i++) {
-    for (let j = start[0] === i ? start[1] : 0; j < grid[0].length; j++) {
-      const prev =
-        j === 0 ? tempGrid[i - 1][tempGrid[0].length - 1] : tempGrid[i][j - 1];
-      const next =
-        j === tempGrid[i].length
-          ? tempGrid[i][grid[0].length - 1]
-          : tempGrid[i - 1][j + 1];
+  let startX = Math.max(start[0], 1);
+  let startY =
+    start[0] === 0 || (start[0] === 1 && start[1] < 2) ? 1 : start[1];
+  if (startY === grid[0].length - 1) {
+    startY = 0;
+    startX++;
+  } else {
+    startY++;
+  }
+  const tempGrid = [...grid.slice(0, startX)];
+  for (let i = startX; i < grid.length; i++) {
+    let j = 0;
+    if (i === startX) {
+      tempGrid.push(grid[startX].slice(0, startY));
+      j = startY;
+    } else {
+      tempGrid.push([]);
+    }
+    while (j < grid[0].length) {
+      const prev = j === 0 ? 0 : tempGrid[i - 1][j - 1];
+      const next = j === tempGrid[i].length ? 0 : tempGrid[i - 1][j + 1];
       const shape = prev + 2 * tempGrid[i - 1][j] + 4 * next;
       tempGrid[i][j] = rule[shape];
+      j++;
     }
   }
   grid.length = 0;
@@ -145,11 +157,11 @@ function applyRule(start) {
 }
 
 function init() {
-const ruleControl = $("ruleControl");
-for (let i = 0; i < 8; i++) {
-  const ruleDiv = generateRuleDisplay(i, 3);
-  ruleControl.append(ruleDiv);
-  rule.push(0);
+  const ruleControl = $("ruleControl");
+  for (let i = 0; i < 8; i++) {
+    const ruleDiv = generateRuleDisplay(i, 3);
+    ruleControl.append(ruleDiv);
+    rule.push(0);
   }
   updateDimensions();
   resetGrid();
