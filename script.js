@@ -144,9 +144,11 @@ function applyRule(start) {
     } else {
       tempGrid.push([]);
     }
-    while (j < grid[0].length) {
-      const prev = j === 0 ? 0 : tempGrid[i - 1][j - 1];
-      const next = j === tempGrid[i].length ? 0 : tempGrid[i - 1][j + 1];
+    while (j < tempGrid[0].length) {
+      const prev =
+        j === 0 ? tempGrid[i - 1][tempGrid[0].length - 1] : tempGrid[i][j - 1];
+      const next =
+        j === tempGrid[0].length - 1 ? tempGrid[i][0] : tempGrid[i - 1][j + 1];
       const shape = prev + 2 * tempGrid[i - 1][j] + 4 * next;
       tempGrid[i][j] = rule[shape];
       j++;
