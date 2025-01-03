@@ -112,7 +112,8 @@ function randomSeed(randLevel) {
 function randomRule() {
   const length = rule.length;
   rule.length = 0;
-  for (let i = 0; i < length; i++) {
+  rule.push(0);
+  for (let i = 1; i < length; i++) {
     rule.push(Math.random() > 0.5 ? 1 : 0);
     flipPixelValue($(`rule-${i}-input`), rule[i] === 1 ? 0 : 1);
   }
