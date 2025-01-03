@@ -10,6 +10,12 @@ main {
   padding: 16px;
 }
 
+fieldset {
+  border: 0px;
+  margin: 0px;
+  padding: 16px;
+}
+
 .gridContainer {
   display: grid;
   justify-items: center;
@@ -27,14 +33,17 @@ main {
 }
 
 #ruleControl {
-  display: flex;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  width: fit-content;
+  column-gap: 16px;
+  row-gap: 32px;
   margin: 16px;
+  margin-top: 32px;
 }
 
 .ruleContainer {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   width: fit-content;
 }
 

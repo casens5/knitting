@@ -7,6 +7,7 @@
 const grid = [];
 const dimensions = [];
 const rule = [];
+const ruleSize = [];
 
 function $(id) {
   return document.getElementById(id);
@@ -52,6 +53,7 @@ function generateGridHtml() {
 function generateRuleDisplay(number, total) {
   const ruleContainer = document.createElement("div");
   ruleContainer.classList.add("ruleContainer");
+  ruleContainer.style.gridTemplateColumns = `repeat(${total}, 1fr)`;
   ruleContainer.id = `rule-${number}`;
   const spaceDiv = document.createElement("div");
   spaceDiv.classList.add("no-border");
@@ -136,6 +138,18 @@ function updateDimensions() {
   dimensions.push(rows, columns);
 }
 
+function updateRuleDisplay() {
+  const ruleControl = $("ruleControl");
+  ruleControl.replaceChildren();
+  ruleSize.length = 0;
+  ruleSize.push($("ruleSize").value);
+  for (let i = 0; i < 2 ** ruleSize[0]; i++) {
+    const ruleDiv = generateRuleDisplay(i, ruleSize[0]);
+    ruleControl.append(ruleDiv);
+    rule.push(0);
+  }
+}
+
 function applyRule(start) {
   let startX = Math.max(start[0], 1);
   let startY =
@@ -170,12 +184,7 @@ function applyRule(start) {
 }
 
 function init() {
-  const ruleControl = $("ruleControl");
-  for (let i = 0; i < 8; i++) {
-    const ruleDiv = generateRuleDisplay(i, 3);
-    ruleControl.append(ruleDiv);
-    rule.push(0);
-  }
+  updateRuleDisplay();
   updateDimensions();
   resetGrid();
   generateGridHtml();
@@ -210,5 +219,7 @@ $("randomRule").addEventListener("click", randomRule);
 $("randomSeed").addEventListener("click", () => {
   randomSeed($("randomSeedDensity").value);
 });
+
+$("setRuleSize").addEventListener("click", updateRuleDisplay);
 
 init();
