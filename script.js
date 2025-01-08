@@ -58,6 +58,10 @@ function generateRuleDisplay(number, total) {
   const spaceDiv = document.createElement("div");
   spaceDiv.classList.add("no-border");
   ruleContainer.append(spaceDiv);
+  if (total === 5) {
+    const dupe = spaceDiv.cloneNode(true);
+    ruleContainer.append(dupe);
+  }
 
   for (let i = 0; i < total; i++) {
     const cellDiv = document.createElement("div");
@@ -186,9 +190,20 @@ function applyRule(start) {
     while (j < tempGrid[0].length) {
       const prev =
         j === 0 ? tempGrid[i - 1][tempGrid[0].length - 1] : tempGrid[i][j - 1];
-      const next =
+      const up0 = tempGrid[i - 1][j];
+      const up1 =
         j === tempGrid[0].length - 1 ? tempGrid[i][0] : tempGrid[i - 1][j + 1];
-      const shape = prev + 2 * tempGrid[i - 1][j] + 4 * next;
+      let up2 = 0;
+      if (rule.length > 8) {
+        if (j === tempGrid[0].length - 1) {
+          up2 = tempGrid[i][1];
+        } else if (j === tempGrid[0].length - 2) {
+          up2 = tempGrid[i][0];
+        } else {
+          up2 = tempGrid[i - 1][j + 2];
+        }
+      }
+      const shape = prev + 2 * up0 + 4 * up1 + 8 * up2;
       tempGrid[i][j] = rule[shape];
       j++;
     }
