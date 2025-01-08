@@ -131,6 +131,20 @@ function randomRule() {
   }
 }
 
+function symmetricRule() {
+  const length = rule.length;
+  rule.length = 0;
+  rule.push(0);
+  rule.push(0);
+  for (let i = 2; i < length; i += 2) {
+    const thisVal = Math.random() > 0.5 ? 1 : 0;
+    rule.push(thisVal);
+    rule.push(thisVal);
+    setRuleValue($(`rule-${i}-input`), rule[i]);
+    setRuleValue($(`rule-${i + 1}-input`), rule[i + 1]);
+  }
+}
+
 function updateDimensions() {
   const rows = parseInt($("rowsInput").value, 10);
   const columns = parseInt($("columnsInput").value, 10);
@@ -188,6 +202,10 @@ function init() {
   updateDimensions();
   resetGrid();
   generateGridHtml();
+}
+
+function printRule() {
+  console.log(`[ ${rule.join(", ")} ] --`);
 }
 
 // *********
