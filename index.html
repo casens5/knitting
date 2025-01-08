@@ -1,43 +1,40 @@
 <!doctype html>
 <html>
-  <head>
-    <title>knitting</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="./main.css" rel="stylesheet" />
-  </head>
 
-  <body>
-    <main>
-      <div id="controlsDrawer">
-        controls
-        <span id="UpArrow">▲</span>
-        <span id="DownArrow" class="hidden">▼</span>
-      </div>
-      <fieldset id="controls" data-hidden="0">
-        <div>
-          <label>
-            columns:
-            <input type="number" value="6" id="columnsInput" />
-          </label>
-          <label>
-            rows:
-            <input type="number" value="6" id="rowsInput" />
-          </label>
-          <button id="getGridSize" class="">resize grid</button>
-          <label>
-            random density:
-            <input
-              type="number"
-              min="0.01"
-              max="0.99"
-              step="0.1"
-              value="0.5"
-              id="randomSeedDensity"
-            />
-          </label>
-          <button id="randomSeed" class="">random seed</button>
-          <button id="randomRule" class="">random rule</button>
+<head>
+  <title>knitting</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="./main.css" rel="stylesheet" />
+</head>
+
+<body>
+  <main>
+    <div id="controlsDrawer">
+      controls
+      <span id="UpArrow">▲</span>
+      <span id="DownArrow" class="hidden">▼</span>
+    </div>
+    <fieldset id="controls" data-hidden="0">
+      <div>
+        <label>
+          columns:
+          <input type="number" value="6" id="columnsInput" />
+        </label>
+        <label>
+          rows:
+          <input type="number" value="6" id="rowsInput" />
+        </label>
+        <button id="getGridSize" class="">resize grid</button>
+        <br>
+        <br>
+        <label>
+          random density:
+          <input type="number" min="0.01" max="0.99" step="0.1" value="0.5" id="randomSeedDensity" />
+        </label>
+        <button id="randomSeed" class="">random seed</button>
+        <button id="randomRule" class="">random rule</button>
+        <!--
           <label>
             rule size:
             <input
@@ -50,13 +47,15 @@
             />
           </label>
           <button id="setRuleSize" class="">set rule size</button>
-        </div>
-        <div id="ruleControl"></div>
-      </fieldset>
-      <div class="gridContainer">
-        <div id="outputGrid"></div>
+        -->
       </div>
-    </main>
-    <script src="script.js"></script>
-  </body>
+      <div id="ruleControl"></div>
+    </fieldset>
+    <div class="gridContainer">
+      <div id="outputGrid"></div>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+
 </html>

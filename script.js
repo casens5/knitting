@@ -57,7 +57,7 @@ function generateRuleDisplay(number, total) {
   ruleContainer.id = `rule-${number}`;
   const spaceDiv = document.createElement("div");
   spaceDiv.classList.add("no-border");
-  ruleContainer.append(spaceDiv);
+  //ruleContainer.append(spaceDiv);
   if (total === 5) {
     const dupe = spaceDiv.cloneNode(true);
     ruleContainer.append(dupe);
@@ -67,20 +67,23 @@ function generateRuleDisplay(number, total) {
     const cellDiv = document.createElement("div");
     cellDiv.classList.add("cell");
     ruleContainer.append(cellDiv);
-    if (i === total - 1) {
+    /*if (i === total - 1) {
       if (number % 2 === 1) {
         cellDiv.classList.add("live");
       } else {
         cellDiv.classList.add("dead");
       }
+    } else {*/
+    //if (Math.floor(number / 2 ** (i + 1)) % 2 === 1) {
+    if (Math.floor(number / 2 ** i) % 2 === 1) {
+      cellDiv.classList.add("live");
     } else {
-      if (Math.floor(number / 2 ** (i + 1)) % 2 === 1) {
-        cellDiv.classList.add("live");
-      } else {
-        cellDiv.classList.add("dead");
-      }
+      cellDiv.classList.add("dead");
     }
+    //}
   }
+
+  ruleContainer.append(spaceDiv);
 
   const inputDiv = document.createElement("div");
   inputDiv.id = `rule-${number}-input`;
@@ -160,7 +163,8 @@ function updateRuleDisplay() {
   const ruleControl = $("ruleControl");
   ruleControl.replaceChildren();
   ruleSize.length = 0;
-  ruleSize.push($("ruleSize").value);
+  //ruleSize.push($("ruleSize").value);
+  ruleSize.push(3);
   for (let i = 0; i < 2 ** ruleSize[0]; i++) {
     const ruleDiv = generateRuleDisplay(i, ruleSize[0]);
     ruleControl.append(ruleDiv);
@@ -249,6 +253,6 @@ $("randomSeed").addEventListener("click", () => {
   randomSeed($("randomSeedDensity").value);
 });
 
-$("setRuleSize").addEventListener("click", updateRuleDisplay);
+//$("setRuleSize").addEventListener("click", updateRuleDisplay);
 
 init();
