@@ -175,8 +175,7 @@ function updateRuleDisplay() {
 function applyRuleGrid(start) {
   //function applyRule(start) {
   let startX = Math.max(start[0], 1);
-  let startY =
-    start[0] === 0 || (start[0] === 1 && start[1] < 2) ? 1 : start[1];
+  let startY = start[0] === 0 ? 0 : start[1];
   if (startY === grid[0].length - 1) {
     startY = 0;
     startX++;
@@ -195,7 +194,7 @@ function applyRuleGrid(start) {
     while (j < tempGrid[0].length) {
       const prev =
         j === 0
-          ? tempGrid[i - 1][tempGrid[0].length - 1]
+          ? tempGrid[i - 2][tempGrid[0].length - 1]
           : tempGrid[i - 1][j - 1];
       const up0 = tempGrid[i - 1][j];
       const up1 =
