@@ -172,7 +172,8 @@ function updateRuleDisplay() {
   }
 }
 
-function applyRule(start) {
+function applyRuleGrid(start) {
+  //function applyRule(start) {
   let startX = Math.max(start[0], 1);
   let startY =
     start[0] === 0 || (start[0] === 1 && start[1] < 2) ? 1 : start[1];
@@ -206,6 +207,34 @@ function applyRule(start) {
   }
   grid.length = 0;
   grid.push(...tempGrid);
+}
+
+//function applyRuleSpiral(start) {
+function applyRule(start) {
+  const flatGrid = grid.reduce((acc, current) => acc.concat(current), []);
+  const startX = Math.max(
+    start[0] * grid[0].length + start[1],
+    grid[0].length + 1,
+  );
+  const tempGrid = [...flatGrid.slice(0, startX)];
+  const len = grid[0].length;
+  //console.log("hmm", flatGrid, tempGrid);
+  for (let i = startX; i < flatGrid.length; i++) {
+    const shape =
+      tempGrid[i - len - 1] + 2 * tempGrid[i - len] + 4 * tempGrid[i - len + 1];
+    tempGrid.push(rule[shape]);
+    //console.log("what", i, shape, String(tempGrid));
+  }
+
+  const zippedGrid = tempGrid.reduce((acc, current, index) => {
+    if (index % grid[0].length === 0) acc.push([]);
+    acc[acc.length - 1].push(current);
+    return acc;
+  }, []);
+
+  //console.log("and", tempGrid, zippedGrid);
+  grid.length = 0;
+  grid.push(...zippedGrid);
 }
 
 function init() {

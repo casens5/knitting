@@ -62,8 +62,8 @@ fieldset {
 }
 
 .cell {
-  width: 16px;
-  height: 16px;
+  width: 8px;
+  height: 8px;
   outline: 1px solid #555;
 }
 
