@@ -1,0 +1,128 @@
+middle:
+
+=IF(AND(A2=0, B2=0, c2=0, d3=0), $BW$6, 1)
+
+
+
+
+
+
+=IF(AND(A2=0, B2=0, c2=0, d3=0), $BW$6,
+ IF(AND(A2=0, B2=0, c2=0, d3=1), $CB$6,
+ IF(AND(A2=0, B2=0, c2=1, d3=0), $CG$6,
+ IF(AND(A2=0, B2=0, c2=1, d3=1), $CL$6,
+ IF(AND(A2=0, B2=1, c2=0, d3=0), $CQ$6,
+ IF(AND(A2=0, B2=1, c2=0, d3=1), $CV$6,
+ IF(AND(A2=0, B2=1, c2=1, d3=0), $DA$6,
+ IF(AND(A2=0, B2=1, c2=1, d3=1), $DF$6,
+ IF(AND(A2=1, B2=0, c2=0, d3=0), $BW$10,
+ IF(AND(A2=1, B2=0, c2=0, d3=1), $CB$10,
+ IF(AND(A2=1, B2=0, c2=1, d3=0), $CG$10,
+ IF(AND(A2=1, B2=0, c2=1, d3=1), $CL$10,
+ IF(AND(A2=1, B2=1, c2=0, d3=0), $CQ$10,
+ IF(AND(A2=1, B2=1, c2=0, d3=1), $CV$10,
+ IF(AND(A2=1, B2=1, c2=1, d3=0), $DA$10,
+$DF$10
+ )))))))))))))))
+
+
+left:
+
+=IF(AND(BQ3=0, a2=0, b2=0, c3=0), $BW$6,
+ IF(AND(BQ3=0, a2=0, b2=0, c3=1), $CB$6,
+ IF(AND(BQ3=0, a2=0, b2=1, c3=0), $CG$6,
+ IF(AND(BQ3=0, a2=0, b2=1, c3=1), $CL$6,
+ IF(AND(BQ3=0, a2=1, b2=0, c3=0), $CQ$6,
+ IF(AND(BQ3=0, a2=1, b2=0, c3=1), $CV$6,
+ IF(AND(BQ3=0, a2=1, b2=1, c3=0), $DA$6,
+ IF(AND(BQ3=0, a2=1, b2=1, c3=1), $DF$6,
+ IF(AND(BQ3=1, a2=0, b2=0, c3=0), $BW$10,
+ IF(AND(BQ3=1, a2=0, b2=0, c3=1), $CB$10,
+ IF(AND(BQ3=1, a2=0, b2=1, c3=0), $CG$10,
+ IF(AND(BQ3=1, a2=0, b2=1, c3=1), $CL$10,
+ IF(AND(BQ3=1, a2=1, b2=0, c3=0), $CQ$10,
+ IF(AND(BQ3=1, a2=1, b2=0, c3=1), $CV$10,
+ IF(AND(BQ3=1, a2=1, b2=1, c3=0), $DA$10,
+$DF$10,
+ )))))))
+
+=IF(AND(Bp3=0, bq3=0, a2=0, b3=0), $BW$6,
+ IF(AND(Bp3=0, bq3=0, a2=0, b3=1), $CB$6,
+ IF(AND(Bp3=0, bq3=0, a2=1, b3=0), $CG$6,
+ IF(AND(Bp3=0, bq3=0, a2=1, b3=1), $CL$6,
+ IF(AND(Bp3=0, bq3=1, a2=0, b3=0), $CQ$6,
+ IF(AND(Bp3=0, bq3=1, a2=0, b3=1), $CV$6,
+ IF(AND(Bp3=0, bq3=1, a2=1, b3=0), $DA$6,
+ IF(AND(Bp3=0, bq3=1, a2=1, b3=1), $DF$6,
+ IF(AND(Bp3=1, bq3=0, a2=0, b3=0), $BW$10,
+ IF(AND(Bp3=1, bq3=0, a2=0, b3=1), $CB$10,
+ IF(AND(Bp3=1, bq3=0, a2=1, b3=0), $CG$10,
+ IF(AND(Bp3=1, bq3=0, a2=1, b3=1), $CL$10,
+ IF(AND(Bp3=1, bq3=1, a2=0, b3=0), $CQ$10,
+ IF(AND(Bp3=1, bq3=1, a2=0, b3=1), $CV$10,
+ IF(AND(Bp3=1, bq3=1, a2=1, b3=0), $DA$10,
+$DF$10,
+ )))))))
+
+
+
+
+right:
+
+=IF(AND(Bo3=0, bp3=0, bq3=0, a2=0), $BW$6,
+ IF(AND(Bo3=0, bp3=0, bq3=0, a2=1), $CB$6,
+ IF(AND(Bo3=0, bp3=0, bq3=1, a2=0), $CG$6,
+ IF(AND(Bo3=0, bp3=0, bq3=1, a2=1), $CL$6,
+ IF(AND(Bo3=0, bp3=1, bq3=0, a2=0), $CQ$6,
+ IF(AND(Bo3=0, bp3=1, bq3=0, a2=1), $CV$6,
+ IF(AND(Bo3=0, bp3=1, bq3=1, a2=0), $DA$6,
+ IF(AND(Bo3=0, bp3=1, bq3=1, a2=1), $DF$6,
+ IF(AND(Bo3=1, bp3=0, bq3=0, a2=0), $BW$10,
+ IF(AND(Bo3=1, bp3=0, bq3=0, a2=1), $CB$10,
+ IF(AND(Bo3=1, bp3=0, bq3=1, a2=0), $CG$10,
+ IF(AND(Bo3=1, bp3=0, bq3=1, a2=1), $CL$10,
+ IF(AND(Bo3=1, bp3=1, bq3=0, a2=0), $CQ$10,
+ IF(AND(Bo3=1, bp3=1, bq3=0, a2=1), $CV$10,
+ IF(AND(Bo3=1, bp3=1, bq3=1, a2=0), $DA$10,
+$DF$10,
+ )))))))
+
+
+
+
+
+
+
+
+
+3-cell knitter's CA.  wrapping sides where the rows increment.  the right cell is the cell to the right, not to the top right.  the algorithm is:
+
+middle:
+=IF(AND(A2=0, B2=0, C3=0), $BW$6,
+ IF(AND(A2=0, B2=0, C3=1), $CB$6,
+ IF(AND(A2=0, B2=1, C3=0), $CG$6,
+ IF(AND(A2=0, B2=1, C3=1), $CL$6,
+ IF(AND(A2=1, B2=0, C3=0), $CQ$6,
+ IF(AND(A2=1, B2=0, C3=1), $CV$6,
+ IF(AND(A2=1, B2=1, C3=0), $DA$6,
+ $DF$6
+ )))))))
+
+left:
+=IF(AND(BQ3=0, a2=0, b3=0), $CB$6, IF(AND(BQ3=0, a2=0, b3=1), $CG$6, IF(AND(BQ3=0, a2=1, b3=0), $CL$6, IF(AND(BQ3=0, a2=1, b3=1), $CQ$6, IF(AND(BQ3=1, a2=0, b3=0), $CV$6, IF(AND(BQ3=1, a2=0, b3=1), $DA$6, IF(AND(BQ3=1, a2=1, b3=0), $DF$6, $DK$6 )))))))
+
+right:
+=IF(AND(Bo2=0, Bp2=0, a2=0), $CA$6,
+ IF(AND(Bo2=0, Bp2=0, a2=1), $CF$6,
+ IF(AND(Bo2=0, Bp2=1, a2=0), $CK$6,
+ IF(AND(Bo2=0, Bp2=1, a2=1), $CP$6,
+ IF(AND(Bo2=1, Bp2=0, a2=0), $CU$6,
+ IF(AND(Bo2=1, Bp2=0, a2=1), $CZ$6,
+ IF(AND(Bo2=1, Bp2=1, a2=0), $DE$6,
+ $DJ$6 )))))))
+
+
+these rules are interesting:
+0, 1, 1, 0, 0, 1, 1, 0  -- rule 30 ish
+0, 0, 1, 1, 1, 1, 0, 0  -- sierpinski
+0, 1, 0, 1, 1, 0, 1, 0  -- unspeakable chaos
